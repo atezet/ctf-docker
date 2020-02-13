@@ -31,7 +31,7 @@ services:
     restart: unless-stopped
 
   proxy:
-    build: proxy
+    image: arjenz/ctf-proxy
     container_name: ctf-proxy
     depends_on:
       - vpn
@@ -39,7 +39,7 @@ services:
     restart: unless-stopped
 
   kali:
-    build: ./kali
+    image: arjenz/ctf-kali
     container_name: ctf-kali
     depends_on:
       - db
