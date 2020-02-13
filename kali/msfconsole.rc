@@ -1,0 +1,1 @@
+db_connect -y /usr/share/metasploit-framework/config/database.yml

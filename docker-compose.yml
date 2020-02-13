@@ -1,0 +1,56 @@
+version: '3'
+services:
+  vpn:
+    image: dperson/openvpn-client
+    container_name: ctf-vpn
+    cap_add:
+      - NET_ADMIN
+    security_opt:
+      - label:disable
+    devices:
+      - /dev/net/tun
+    volumes:
+      - /dev/net:/dev/net:z
+      - ./ctf.ovpn:/vpn/vpn.conf:ro
+      # - ./credentials.txt:/vpn/credentials.txt:ro
+    sysctls:
+      - net.ipv6.conf.all.disable_ipv6=0
+    ports:
+      # for the proxy
+      - 127.0.0.1:1080:1080
+    restart: unless-stopped
+
+  db:
+    image: postgres:12-alpine
+    container_name: ctf-db
+    volumes:
+      - ctf_database:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: msf
+      POSTGRES_PASSWORD: password123
+    restart: unless-stopped
+
+  proxy:
+    build: proxy
+    container_name: ctf-proxy
+    depends_on:
+      - vpn
+    network_mode: 'service:vpn'
+    restart: unless-stopped
+
+  kali:
+    build: ./kali
+    container_name: ctf-kali
+    depends_on:
+      - db
+      - vpn
+    network_mode: 'service:vpn'
+    volumes:
+      - ctf_kali:/root
+    # keep it alive
+    command: tail -F /dev/null
+    restart: unless-stopped
+
+volumes:
+  ctf_database:
+  ctf_kali:
