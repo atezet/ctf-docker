@@ -19,6 +19,7 @@ services:
       # for the proxy
       - 127.0.0.1:1080:1080
     restart: unless-stopped
+    command: openvpn.sh -D
 
   db:
     image: postgres:12-alpine
