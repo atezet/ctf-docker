@@ -6,7 +6,7 @@ RUN apt update && \
     locales \
     net-tools \
     psmisc \
-    python-pip \
+    python3-pip \
     tmux \
     zsh && \
   apt install -y \
@@ -18,19 +18,22 @@ RUN apt update && \
     netcat \
     nmap \
     metasploit-framework \
-    nikto \
-    padbuster \
     snmp \
     sqlmap \
     wfuzz \
+    windows-binaries \
     wordlists \
     wpscan \
   && apt clean
 
-RUN mkdir -p /root
+RUN pip3 install impacket \
+    virtualenv
+RUN mkdir -p /tools && \
+  git clone https://github.com/Hackplayers/evil-winrm.git /tools/evil-winrm
 
-RUN chsh -s /usr/bin/zsh
-RUN wget https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh -O - | /usr/bin/zsh || true
+RUN mkdir -p /root
+RUN chsh -s /usr/bin/zsh && \
+    wget https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh -O - | /usr/bin/zsh || true
 
 # https://stackoverflow.com/a/28406007/2961949
 RUN sed -i -e 's/# en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/' /etc/locale.gen && locale-gen
