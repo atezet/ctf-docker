@@ -26,7 +26,6 @@ When all containers are running, enter the Kali container using:
 ```
 docker exec -it ctf-kali tmux -CC
 ```
-
 From this shell any commands needed to play the CTF can be run.
 
 ### Copy files
@@ -36,16 +35,18 @@ docker cp $(pwd)/file.txt ctf-kali:/root/file.txt
 ```
 
 ### Browser
-Challenges might involve a webpage, that's what the proxy container is used for. Run your browser through the proxy (with or without extra proxies) to let the traffic go through the VPN.
+Challenges might involve a webpage, that is what the proxy container is used for. Run your browser through the proxy (with or without extra proxies) to let the traffic go through the VPN.
 
+### X11 (on macOS)
+To open an X11 application from inside the Kali container, first open XQuartz, and then run:
+```
+export DISPLAY=${hostname}:0 && xhost + ${hostname}
+```
 
+Now, it should be possible to open X11 applications. You can try it out with e.g. `firefox` or `xtightvncviewer`.
 
 ## Customise
 Feel free to edit anything in any way. Mount other config files, add containers, anything. Suggestions can also be added to this repository.
-
-## Future work
-
-- Add option to use X11 applications, or find a workaround for it.
 
 ## References
 
