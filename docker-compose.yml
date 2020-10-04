@@ -25,7 +25,7 @@ services:
     image: postgres:12-alpine
     container_name: ctf-db
     volumes:
-      - ctf_database:/var/lib/postgresql/data
+      - ctf_db:/var/lib/postgresql/data
     environment:
       POSTGRES_USER: msf
       POSTGRES_PASSWORD: password123
@@ -48,10 +48,13 @@ services:
     network_mode: 'service:vpn'
     volumes:
       - ctf_kali:/root
+      - /tmp/.X11-unix:/tmp/.X11-unix
+    environment:
+      - DISPLAY=${HOSTNAME}:0
     # keep it alive
     command: tail -F /dev/null
     restart: unless-stopped
 
 volumes:
-  ctf_database:
+  ctf_db:
   ctf_kali:
