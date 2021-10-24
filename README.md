@@ -7,6 +7,41 @@ The easiest way to use this setup is to download `docker-compose.yml` and add th
 docker-compose up -d
 ```
 
+### Download
+You could simply download the `docker-compose.yml` using:
+
+```bash
+curl https://raw.githubusercontent.com/arjenzijlstra/ctf-docker/main/docker-compose.yml > docker-compose.yml
+```
+
+### Clone
+Or you can clone the directory:
+```bash
+git clone https://github.com/arjenzijlstra/ctf-docker.git
+```
+
+To use the local containers, you need to change the following lines:
+```yaml
+    image: arjenz/ctf-proxy
+```
+
+and:
+```yaml
+    image: arjenz/ctf-kali
+```
+
+to:
+```yaml
+    build: proxy
+```
+
+and:
+```yaml
+    build: kali
+```
+
+respectively. Now you can edit the `Dockerfile`s and add packages as you please.
+
 ### VPN credentials
 In case credentials are required with the VPN config, create a file called `credentials.txt` with the username and password each on one line, uncomment the following line in `docker-compose.yml`:
 ```yaml
