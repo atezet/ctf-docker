@@ -56,7 +56,7 @@ to:
     - ./data:/root
 ```
 
-This will create a folder `./data` when you start the containers in which the root directory of your Kali container will be mounted. You can now simply copy files to this folder in order to use them in your container.
+When you start the containers, this will create a folder `./data` in which the root directory of your Kali container will be mounted. You can now simply copy files to this folder in order to use them in your container.
 
 ## Customise
 Feel free to edit anything in any way. Mount other config files, add containers, anything. Suggestions can also be added to this repository.
