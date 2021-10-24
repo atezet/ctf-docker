@@ -3,6 +3,7 @@ services:
   vpn:
     image: dperson/openvpn-client
     container_name: ctf-vpn
+    # user: '${UID}:${GID}'
     cap_add:
       - NET_ADMIN
     security_opt:
