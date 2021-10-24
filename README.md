@@ -58,6 +58,17 @@ to:
 
 When you start the containers, this will create a folder `./data` in which the root directory of your Kali container will be mounted. You can now simply copy files to this folder in order to use them in your container.
 
+#### UID/GID (on Linux)
+If using the filesystem on Linux, it is recommended to uncomment the following line in the `docker-compose.yml`:
+```yaml
+    # user: '${UID}:${GID}'
+```
+
+And provide the environment variables when running the setup with:
+```bash
+UID=${UID} GID=${GID} docker-compose up -d
+```
+
 ## Customise
 Feel free to edit anything in any way. Mount other config files, add containers, anything. Suggestions can also be added to this repository.
 
