@@ -45,6 +45,19 @@ export DISPLAY=${hostname}:0 && xhost + ${hostname}
 
 Now, it should be possible to open X11 applications. You can try it out with e.g. `firefox` or `xtightvncviewer`.
 
+### Use filesystem
+If you want to use the filesystem instead of a Docker volume, change the line:
+```
+    - ctf_kali:/root
+```
+
+to:
+```
+    - ./data:/root
+```
+
+When you start the containers, this will create a folder `./data` in which the root directory of your Kali container will be mounted. You can now simply copy files to this folder in order to use them in your container.
+
 ## Customise
 Feel free to edit anything in any way. Mount other config files, add containers, anything. Suggestions can also be added to this repository.
 
