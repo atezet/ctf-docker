@@ -1,4 +1,4 @@
-FROM kalilinux/kali-linux-docker
+FROM kalilinux/kali
 
 RUN apt update && \
   apt upgrade -y && \
@@ -15,7 +15,7 @@ RUN apt update && \
     exploitdb \
     exploitdb-bin-sploits \
     gobuster \
-    netcat \
+    netcat-traditional \
     nmap \
     metasploit-framework \
     snmp \
