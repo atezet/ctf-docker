@@ -43,13 +43,11 @@ services:
     restart: unless-stopped
 
   http:
-    image: monokal/tinyproxy
+    image: arjenz/tinyproxy
     container_name: ctf-http
-    # depends_on:
-    #   - vpn
-    # network_mode: 'service:vpn'
-    ports:
-      - 127.0.0.1:8888:8888
+    depends_on:
+      - vpn
+    network_mode: 'service:vpn'
     command: 'ANY'
     restart: unless-stopped
 
