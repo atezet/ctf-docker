@@ -17,8 +17,10 @@ services:
     sysctls:
       - net.ipv6.conf.all.disable_ipv6=0
     ports:
-      # for the proxy
+      # for the socks proxy
       - 127.0.0.1:1080:1080
+      # for the http proxy
+      - 127.0.0.1:8888:8888
     restart: unless-stopped
     command: openvpn.sh -D
 
@@ -32,12 +34,23 @@ services:
       POSTGRES_PASSWORD: password123
     restart: unless-stopped
 
-  proxy:
+  socks:
     image: arjenz/ctf-proxy
-    container_name: ctf-proxy
+    container_name: ctf-socks
     depends_on:
       - vpn
     network_mode: 'service:vpn'
+    restart: unless-stopped
+
+  http:
+    image: monokal/tinyproxy
+    container_name: ctf-http
+    # depends_on:
+    #   - vpn
+    # network_mode: 'service:vpn'
+    ports:
+      - 127.0.0.1:8888:8888
+    command: 'ANY'
     restart: unless-stopped
 
   kali:
