@@ -43,7 +43,7 @@ services:
     restart: unless-stopped
 
   http:
-    image: monokal/tinyproxy
+    image: arjenz/tinyproxy
     container_name: ctf-http
     # depends_on:
     #   - vpn
