@@ -1,4 +1,4 @@
-FROM kalilinux/kali
+FROM kalilinux/kali-rolling
 
 RUN apt update && \
   apt upgrade -y && \
@@ -11,25 +11,18 @@ RUN apt update && \
     zsh && \
   apt install -y \
     dnsutils \
-    dirb \
     exploitdb \
     exploitdb-bin-sploits \
-    gobuster \
     netcat-traditional \
     nmap \
     metasploit-framework \
-    snmp \
     sqlmap \
-    wfuzz \
     windows-binaries \
     wordlists \
-    wpscan \
   && apt clean
 
 RUN pip3 install impacket \
     virtualenv
-RUN mkdir -p /tools && \
-  git clone https://github.com/Hackplayers/evil-winrm.git /tools/evil-winrm
 
 RUN mkdir -p /root
 RUN chsh -s /usr/bin/zsh && \
@@ -40,7 +33,6 @@ RUN sed -i -e 's/# en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/' /etc/locale.gen && loca
 ENV LANG en_US.UTF-8
 ENV LANGUAGE en_US:en
 ENV LC_ALL en_US.UTF-8
-
 
 COPY msfconsole.rc /root/.msf4/msfconsole.rc
 COPY database.yml /usr/share/metasploit-framework/config/database.yml
